@@ -29,20 +29,9 @@ module.exports = async function (context, req) {
 
     console.log("SPACER  🔮\n\n");
 
-    let resp = new ResponseProxy(context);
+    let resp = new ResponseProxy();
 
-    // Seemingly just returns before it is done...
-    await rec.requestListener(inc, resp);
+    rec.requestListener(inc, resp);
 
-    await waitUpBuddy(1);
-
-    context.res = resp.getResponse();
+    context.res = await resp.getResponse();
 }
-
-function waitUpBuddy(x) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(x);
-      }, 200);
-    });
-  }
