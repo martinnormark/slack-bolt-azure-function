@@ -9,11 +9,9 @@ const rec = new HTTPReceiver({
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
     endpoints: ['/slack/events']
-})
+});
 
 rec.init(app);
-
-console.log(process.env.SLACK_SIGNING_SECRET);
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -24,10 +22,6 @@ module.exports = async function (context, req) {
     inc.body = req.body;
     inc.headers = req.headers;
     inc.rawBody = Buffer.from(req.rawBody);
-
-    console.log(inc);
-
-    console.log("SPACER  🔮\n\n");
 
     let resp = new ResponseProxy();
 
