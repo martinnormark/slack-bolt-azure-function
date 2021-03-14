@@ -1,6 +1,7 @@
 class ResponseProxy {
     constructor() {
         this.data = null;
+        this.promise = new Promise((resolve) => this.resolve = resolve);
     }
 
     convertToBody(body, encoding) {
@@ -18,9 +19,11 @@ class ResponseProxy {
         if (data) {
             this.data = JSON.parse(data);
         }
+        this.resolve();
     }
 
-    getResponse() {
+    async getResponse() {
+        await this.promise;
         console.log("data", this.data);
 
         return {
