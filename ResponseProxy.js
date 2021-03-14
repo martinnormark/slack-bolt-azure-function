@@ -15,10 +15,10 @@ class ResponseProxy {
     }
     
     end(data, encoding) {
-        console.log("parsing", data);
         if (data) {
-            this.data = JSON.parse(data);
+            this.data = JSON.parse(this.convertToBody(data, encoding));
         }
+
         this.resolve();
     }
 
